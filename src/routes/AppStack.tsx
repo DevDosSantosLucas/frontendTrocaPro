@@ -18,7 +18,7 @@ function AppStack(){
                     headerShown: false}}  >
                 {/* <Stack.Screen name = "SignUp" component = {SignUp}/>  */}
                         
-                <Stack.Screen name = "Login" component = {Login}/> 
+                {/* <Stack.Screen name = "Login" component = {Login}/>  */}
                 {/* <Stack.Screen name = "Main"  component = {Main}/> */}
                 <Stack.Screen name = "NavTabs"  component = {NavTabs}/>
                 

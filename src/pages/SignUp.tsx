@@ -22,25 +22,26 @@ interface WhatsApp{
     whatsapp: string
 }
 
-interface UF{
-  uf:string       
-}
+// interface UF{
+//   uf:string       
+// }
 
 export default function SignUp() {
     const [whatsapp,setWhatsapp] =useState('');  
     const [name,setName] =useState('');
     const [city,setCity] =useState('');
 
-    const [uf,setUf] =useState<UF | null>(null)  ;//<==========
+    // const [uf,setUf] =useState<UF | null>(null)  ;//<==========
+    const [uf,setUf] =useState('') ;//<==========
 
     const [password,setPassword] =useState('');
     const [avatar, setAvatar] = useState(null);
 
-    const [curso,setCursos] = useState(['Android','NodeJs'])
+    // const [curso,setCursos] = useState(['Android','NodeJs'])
 
     const navigation = useNavigation();
 
-    const route = useRoute();
+    // const route = useRoute();
 
     useEffect(() => {
       (async () => {
@@ -125,20 +126,20 @@ export default function SignUp() {
       />
 
       <Text style={styles.label}>uf</Text>
-      <Picker
+      {/* <Picker
         selectedValue={uf}
         style={{ height: 50, width: 150 }}
         onValueChange={(newUf, ufIndex) => setUf(newUf: uf)}
       >
         <Picker.Item label="Java" value="java" />
         <Picker.Item label="JavaScript" value="js" />
-      </Picker>
-      {/* <TextInput
+      </Picker> */}
+      <TextInput
         style={styles.input}
         multiline
         value = {uf}
         onChangeText = { setUf}
-      /> */}
+      />
 
       <Text style={styles.label}>Senha</Text>
       <TextInput

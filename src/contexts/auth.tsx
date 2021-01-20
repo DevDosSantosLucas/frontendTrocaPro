@@ -73,6 +73,8 @@ import api from "../services/api";
 import AsyncStorage from "@react-native-community/async-storage";
 // import AsyncStorage from  "@react-native-async-storage/async-storage"
 import { ISignInProps } from "../Interfaces";
+import SignIn from '../pages/SignIn'
+
 
 interface User {
     user_id: string;
@@ -88,7 +90,10 @@ interface AuthContextData {
   signed: boolean;
   user: User | null;
   loading: boolean;
-  signIn(data: ISignInProps): Promise<void>;
+  // signIn(data: ISignInProps): Promise<void>;
+  signIn(x: string,y:string): Promise<void>;
+  // signIn():Promise<void>;
+
   signOut(): void;
 }
 
@@ -100,9 +105,11 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function loadStoragedData() {
-      const storagedUser = await AsyncStorage.getItem("@eswapp:user");
-      const storagedToken = await AsyncStorage.getItem("@eswapp:token");
-
+      const storagedUser = await AsyncStorage.getItem("@trocapro:user");
+      const storagedToken = await AsyncStorage.getItem("@trocapro:token");
+     console.log("storagedUser", storagedUser);
+     console.log("storagedToken", storagedToken);
+      
       if (storagedUser && storagedToken) {
         api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
 
@@ -113,13 +120,33 @@ export const AuthProvider: React.FC = ({ children }) => {
     loadStoragedData();
   }, []);
 
-  async function signIn(data: ISignInProps) {
-    const response = await auth.signIn(data);
-    setUser(response.user);
+  // async function signIn(data: FormData) {
+  async function signIn(x:string,y:string) {
+  // async function signIn() {
+      
+    //  console.log("x e y",x,y);
+    
+    // const response = await auth.signIn(data);
+    const data = new FormData();
+        // lowhatsapp
+        data.append('whatsapp', x);
+        data.append('password', y);
+    // console.log('data')
+    // console.log(data)
 
-    api.defaults.headers["Authorization"] = `Bearer ${response.token}`;
-    await AsyncStorage.setItem("@mobile:user", JSON.stringify(response.user));
-    await AsyncStorage.setItem("@mobile:token", response.token);
+    const response = await api.post('session',data);
+
+    
+    setUser(response.headers.user);
+    // setUser();
+    
+
+
+
+    api.defaults.headers["Authorization"] = `Bearer ${response.headers.token}`;
+    // await AsyncStorage.setItem("@trocapro:user", JSON.stringify(response.headers.user));
+    // await AsyncStorage.setItem("@trocapro:token", response.headers.token);
+    
   }
 
   function signOut() {

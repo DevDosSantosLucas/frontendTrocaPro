@@ -1,4 +1,5 @@
-export interface ISignInProps {
+  export interface ISignInProps {
+  // export interface FormData {
     whatsapp: number;
     password: string;
   }

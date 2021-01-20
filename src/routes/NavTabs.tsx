@@ -6,7 +6,7 @@ import AddItems from '../pages/AddItems';
 import Main from '../pages/Main';
 import Perfil from '../pages/Perfil';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
 function NavTabs(){
@@ -17,7 +17,7 @@ function NavTabs(){
                 showLabel: false,
                 style:{
                     elevation:0,
-                    shadownOpacity:0,
+                    // shadownOpacity:0,
                     height:'10%',
                 },
                 tabStyle:{
@@ -41,39 +41,42 @@ function NavTabs(){
             
 
             <Tab.Screen name = "Main"   component = { Main}  
-                        options={{
+                        // options={{
                             
-                            tabBarIcon: ({ color}) => {
-                                return(
-                                    <Icon name ='ios-search-circle-sharp'
-                                          color = {color} size = {50}/>
-                                );
-                            }
-                        }} />
+                        //     tabBarIcon: ({ color}) => {
+                        //         return(
+                        //             <Icon name ='ios-search-circle-sharp'
+                        //                   color = {color} size = {50}/>
+                        //         );
+                        //     }
+                        // }} 
+                        />
             <Tab.Screen name = "AddItems" component = { AddItems}
-                    options={{
+                    // options={{
                         
-                            tabBarIcon: ({ color}) => {
-                                return(
-                                    <Icon name ='md-add-circle-sharp'
-                                            color = {color} size ={50}/>
-                                );
-                            }
-                        }} />
+                    //         tabBarIcon: ({ color}) => {
+                    //             return(
+                    //                 <Icon name ='md-add-circle-sharp'
+                    //                         color = {color} size ={50}/>
+                    //             );
+                    //         }
+                    //     }} 
+                        />
 
             <Tab.Screen name = "Perfil"   component = { Perfil}
                         
-                        options={{
+                        // options={{
                             
-                            tabBarIcon: ({ color}) => {
-                                return(
-                                    <Icon name ='ios-person-circle-sharp'
-                                        size = {50} color = {color}/>
-                                );
-                            }
-                        }}>
+                        //     tabBarIcon: ({ color}) => {
+                        //         return(
+                        //             <Icon name ='ios-person-circle-sharp'
+                        //                 size = {50} color = {color}/>
+                        //         );
+                        //     }
+                        //  }}
+                         />
                            
-                        </Tab.Screen>
+                        {/* </Tab.Screen> */}
             
         </Tab.Navigator>
     );

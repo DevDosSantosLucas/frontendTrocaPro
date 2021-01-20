@@ -12,9 +12,9 @@ import { RectButton } from 'react-native-gesture-handler';
 // import OrphanageDetails from '../OrphanageDetails';
 
 import {useNavigation} from '@react-navigation/native';
+import { ISignInProps } from "../Interfaces";
 
-
-
+import api from '../services/api'
 // const styles = StyleSheet.create({
 //     container: {flex: 1, justifyContent: 'center', alignItems : 'center'},
 // });
@@ -38,21 +38,29 @@ const SignIn = ()=>{
 
     }
 
-    function handleSignIn(){
+    async function handleSignIn(){
         
     
 
     
 
-        const data = new FormData();
+        // const data = new FormData();
 
-        data.append('whatsapp', String(whatsapp));
-        data.append('password', password);
+        // data.append('whatsapp', String(whatsapp));
+        // data.append('password', password);
+         
+        
+        // const login :ISignInProps;
+        // login.whatsapp
 
+    //  console.log("logar", data);
+     console.log("logar", whatsapp,password);
+    //  await api.post('session',data);
+      
+    //  navigation.navigate('SignUp');
+        signIn(whatsapp,password);
+        // signIn();
 
-
-     console.log("logar", data);
-    //  signIn(data);
     }
 
     return(
