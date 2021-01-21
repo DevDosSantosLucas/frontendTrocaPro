@@ -11,7 +11,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import api from '../services/api';
 import ibgeAPI from '../services/apiIBGE';
-
+import RNPickerSelect from 'react-native-picker-select'
 
 interface WhatsApp{
   // OrphanageDataRouteParams {
@@ -42,9 +42,11 @@ export default function SignUp() {
     const navigation = useNavigation();
 
     // const route = useRoute();
-
+    
     useEffect(() => {
       (async () => {
+
+        const dataa = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome")
         if (Platform.OS !== 'web') {
           const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
           if (status !== 'granted') {
@@ -95,9 +97,12 @@ export default function SignUp() {
       //   setAvatar(result.);
       // }
     };
-      
+    const pickerRef = React.useRef<RNPickerSelect | null>()
+    // const r = React.useRef<RNPickerSelect | null>()
+
 
   return (
+    
     <ScrollView style={styles.container} contentContainerStyle={{ padding: 24 }}>
       <Text style={styles.title}>Cadastre - se :</Text>
 
@@ -117,30 +122,58 @@ export default function SignUp() {
         onChangeText = {setWhatsapp}
       />
 
-      <Text style={styles.label}>Cidade</Text>
-      <TextInput
-        style={styles.input}
-        multiline
-        value = {city}
-        onChangeText = { setCity}
-      />
+      
 
       <Text style={styles.label}>uf</Text>
-      {/* <Picker
-        selectedValue={uf}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(newUf, ufIndex) => setUf(newUf: uf)}
-      >
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
-      </Picker> */}
-      <TextInput
-        style={styles.input}
-        multiline
-        value = {uf}
-        onChangeText = { setUf}
-      />
+      <View>
+       <TouchableOpacity onPress={() => {
+           if (pickerRef.current) {
+             pickerRef.current.togglePicker(true)
+           }
+        }}>
+      </TouchableOpacity>
+      <RNPickerSelect
+          ref={r => pickerRef.current = r}
+          value={1}
+          placeholder={{ label: 'Selecione seu Estado', value: uf }}
+          // onValueChange={() => console.log('change')}
+          onValueChange={uf =>  setUf(uf)}
 
+          items={[                       
+            {label: 'SP', value: 'SP'},
+            {label: 'MG', value: 'MG'}
+            
+          ]} 
+        //   {.keys(items).map((key) => {
+        //     return (<Picker.Item label={this.props.options[key]} value={key} key={key}/>) //if you have a bunch of keys value pair
+        // })}
+        />
+      </View>
+      {console.log(uf)}
+     
+      <Text style={styles.label}>Cidade</Text>
+      <View>
+       <TouchableOpacity onPress={() => {
+           if (pickerRef.current) {
+             pickerRef.current.togglePicker(true)
+           }
+        }}>
+      </TouchableOpacity>
+      <RNPickerSelect
+          ref={r => pickerRef.current = r}
+          value={1}
+          placeholder={{ label: 'Selecione sua Cidade', value: city }}
+          // onValueChange={() => console.log('change')}
+          onValueChange={city =>  setCity(city)}
+
+          items={[                       
+            {label: 'ARARAQUARA', value: 'ARARAQUARA'},
+            {label: 'SÃO PAULO', value: 'SÃO PAULO'}
+            
+          ]} 
+        />
+      </View>
+      {console.log(city)}
       <Text style={styles.label}>Senha</Text>
       <TextInput
         style={styles.input}
